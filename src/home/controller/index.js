@@ -57,16 +57,15 @@ export default class extends Base {
       return false
     }
   }
-  indexAction(){
-    let data = this.getJsSdk()
-    console.log(data)
+  async indexAction(){
+    let data = await this.getJsSdk()
     this.assign('conf', data)
     return this.display();
   }
-  commitAction(){
+  async commitAction(){
     return this.display('commit')
   }
-  detailAction(){
+  async detailAction(){
     return this.display('detail')
   }
   async hahaAction(){
