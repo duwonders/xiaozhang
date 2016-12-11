@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>提交信息</title>
+  <link rel="stylesheet" href="/static/less/index.css">
+  <script src="/static/js/flexble.js"></script>
+</head>
+<body>
+  <div id="commit-container">
+    <div class="shadow" style="display:none"></div>
+    <div class="info-con" style="display:none">
+      <div class="img">
+      </div>
+      <p>提交成功</p>
+    </div>
+    <div class="form">
+      <div class="form-top">
+        <div class="top-left">
+          <span>姓名</span>
+          <input type="text" id="name">
+        </div>
+        <div class="top-right">
+          <span>性别</span>
+          <div class="sex-con">
+            <span class="img" id="boy">♂</span>
+            <span>男</span>
+            <span class="img" id="girl">♀</span>
+            <span>女</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-btn">
+        <span>学号</span>
+        <input type="text" id="stunum">
+        <span>学院</span>
+        <input type="text" id="acadmy">
+        <span>联系方式</span>
+        <input type="text" id="phone">
+      </div>
+      <button class="commit">提&nbsp&nbsp交</button>
+    </div>
+  </div>
+  <script src="/static/js/zepto.js"></script>
+  <script>
+    var sex;
+    $('#boy')
+    .on('click', function(){
+      $('#girl').css({
+        background: "#f6e48f"
+      })
+      $('#boy').css({
+        background: "#fd8f47"
+      })
+      sex = '男'
+    })
+    $('#girl')
+    .on('click', function(){
+      $('#girl').css({
+        background: "#fd8f47"
+      })
+      $('#boy').css({
+        background: "#f6e48f"
+      })
+      sex = '女'
+    })
+    $('.commit')
+    .on('click', function(){ 
+      var data = {
+        name: $('#name').val(),
+        sex: sex,
+        stunum: $('#stunum').val(),
+        acadmy: $('#acadmy').val(),
+        phone: $('#phone').val()
+      }
+      for(var i in data){
+        if(!data[i]){
+          alert("信息不全")
+          return
+        }
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/home/Index/haha',
+        data: 'info=' + JSON.stringify(data),
+        contentType: 'application/json',
+        success: function(data){
+          console.log(data)
+        }
+      })
+    })
+  </script>
+</body>
+</html>
