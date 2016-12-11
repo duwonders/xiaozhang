@@ -25,6 +25,8 @@
                <button class="descript">活动介绍</button>
                </div>
                <script src="/trainee/static/js/zepto.js"></script>
+               <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+               <script src="/trainee/static/js/share.js"></script>
                <script>
                   $('.sign-up')
                   .on('click', function(){
@@ -34,6 +36,83 @@
                   .on('click', function(){
                     window.location.href = "/trainee/home/Index/detail"
                   })
+
+
+
+
+ var TITLE = '我与校长有约';
+ var DESC = '@重邮学子 | 这天别约我！我与校长有约在先了！你要一起吗？';
+ var LINK = 'http://mp.weixin.qq.com/s/kLWX75xYp56S30GpxemAxA';
+ var IMGURL = 'https://redrock.cqupt.edu.cn/trainee/static/home.jpg';
+ var appId = "wx81a4a4b77ec98ff4";
+  wx.config({
+        debug: false,
+        appId: appId,
+        timestamp: {{  }},
+        nonceStr: {{  }},
+        signature: {{  }},
+        jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone'
+        ]
+    });
+    wx.ready(function () {
+      wx.onMenuShareTimeline({
+            title: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            type: '',
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareQQ({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareWeibo({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+        wx.onMenuShareQZone({
+            title: TITLE,
+            desc: DESC,
+            link: LINK,
+            imgUrl: IMGURL,
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+    });
+    wx.error(function(res){
+    })
                </script>
                </body>
                </html>

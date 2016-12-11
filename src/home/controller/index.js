@@ -1,13 +1,27 @@
 'use strict';
 
 import Base from './base.js';
+import crypto from 'crypto'
 
 export default class extends Base {
   /**
    * index action
    * @return {Promise} []
    */
+  md5(str,key){  
+    var decipher = crypto.createHash('md5',key)  
+    if(key){  
+      return decipher.update(str).digest()  
+    }  
+    return decipher.update(str).digest('hex')  
+  }
   indexAction(){
+    let time = Date.parse(new Date())
+    this.assign('conf', {
+      timestamp: time,
+      nonceStr: this.md5(time),
+      signature: this.md5(time)
+    })
     return this.display();
   }
   commitAction(){
