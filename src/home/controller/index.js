@@ -1,7 +1,8 @@
 'use strict';
 
-import Base from './base.js';
+import Base from './base.js'
 import crypto from 'crypto'
+import request from 'request'
 
 export default class extends Base {
   /**
@@ -42,6 +43,17 @@ export default class extends Base {
       data.openid = openid
     }
     return data
+  }
+  requestPost (url,data) {
+    return new Promise(function (resolve, reject) {
+      request.post(url, {form: data}, function (err, res, body) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(JSON.parse(body))
+        }
+      })
+    })
   }
   async getJsSdk () {
     const URL = 'http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/apiJsTicket'
