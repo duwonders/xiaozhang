@@ -34,4 +34,4 @@ output.tar.gz
 app/
 
 runtime/
-# config/
+config/
