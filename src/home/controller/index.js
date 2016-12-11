@@ -8,20 +8,58 @@ export default class extends Base {
    * index action
    * @return {Promise} []
    */
-  md5(str,key){  
-    var decipher = crypto.createHash('md5',key)  
-    if(key){  
-      return decipher.update(str).digest()  
-    }  
-    return decipher.update(str).digest('hex')  
+  hash (str, type) {
+    let hashObj = crypto.createHash(type)
+    hashObj.update(str)
+    return hashObj.digest('hex')
+  }
+  makeStr () {
+    let sStr = 'abcdefghijklmnopqistuvwxyz0123456789ABCDEFGHIGKLMNOPQISTUVWXYZ'
+    let rStr = ''
+    for (let i = 0; i < 16; i++) {
+      rStr += sStr[this.selectFrom(0,61)]
+    }
+    return rStr
+  }
+  selectFrom (lower, upper) {
+    let choices = upper - lower + 1
+    return Math.floor(Math.random() * choices + lower)
+  }
+  getData (openid, code) {
+    const token = 'gh_68f0a1ffc303'
+    const timeStamp = Math.floor(new Date().getTime()).toString()
+    const str = this.makeStr()
+    const secret = this.hash(hash(timeStamp, 'sha1') + hash(str, 'md5') + 'redrock', 'sha1')
+    const data = {
+        "timestamp": timeStamp,
+        "string": str,
+        "secret": secret,
+        "token": token,
+    }
+    if (code) {
+      data.code = code
+    } else if (openid) {
+      data.openid = openid
+    }
+    return data
+  }
+  async getJsSdk () {
+    const URL = 'http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/apiJsTicket'
+    const DATA = this.getData()
+    try {
+      let RES_INF = await this.requestPost(URL, DATA)
+      RES_INF.timeStamp = DATA.timestamp
+      RES_INF.str = DATA.string
+      RES_INF.appid = "wx81a4a4b77ec98ff4"
+      RES_INF.signature = this.hash(`jsapi_ticket=${RES_INF.data}&noncestr=${RES_INF.str}&timestamp=${RES_INF.timeStamp}&url=${'http://' + 'hongyan.cqupt.edu.cn' + this.http.req.url}`, 'sha1')
+      return RES_INF
+    } catch (e) { 
+      return false
+    }
   }
   indexAction(){
-    let time = Date.parse(new Date())
-    this.assign('conf', {
-      timestamp: time,
-      nonceStr: this.md5(time),
-      signature: this.md5(time)
-    })
+    let data = this.getJsSdk()
+    this.assign('conf', data)
     return this.display();
   }
   commitAction(){
