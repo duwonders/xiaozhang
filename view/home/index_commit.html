@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>提交信息</title>
-  <link rel="stylesheet" href="/static/less/index.css">
-  <script src="/static/js/flexble.js"></script>
+  <link rel="stylesheet" href="/trainee/static/less/index.css">
+  <script src="/trainee/static/js/flexble.js"></script>
 </head>
 <body>
   <div id="commit-container">
@@ -41,7 +41,7 @@
       <button class="commit">提&nbsp&nbsp交</button>
     </div>
   </div>
-  <script src="/static/js/zepto.js"></script>
+  <script src="/trainee/static/js/zepto.js"></script>
   <script>
     var sex;
     $('#boy')
@@ -81,7 +81,7 @@
       }
       $.ajax({
         type: 'POST',
-        url: '/home/Index/haha',
+        url: '/trainee/home/Index/haha',
         data: 'info=' + JSON.stringify(data),
         contentType: 'application/json',
         success: function(data){
