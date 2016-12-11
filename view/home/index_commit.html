@@ -43,6 +43,15 @@
   </div>
   <script src="/trainee/static/js/zepto.js"></script>
   <script>
+    function showShadow(){
+      $('body').off('click', showShadow)
+        $("#shadow").css({
+          display: "none"
+        })
+        $("#info-con").css({
+          display: "none"
+        })
+    }
     var sex;
     $('#boy')
     .on('click', function(){
@@ -85,7 +94,16 @@
         data: 'info=' + JSON.stringify(data),
         contentType: 'application/json',
         success: function(data){
-          console.log(data)
+          let res = JSON.parse(data)
+          if(res.status == 200){
+            $("#shadow").css({
+              display: "block"
+            })
+            $("#info-con").css({
+              display: "block"
+            })
+            $('body').on('click', showShadow)
+          }
         }
       })
     })

@@ -25,7 +25,7 @@ export default class extends Base {
       })
     let row = await this
     .model('ifo')
-    .add(JSON.parse(info))
+    .add(info)
     return this.json({
       status: 200,
       message: '成功'
