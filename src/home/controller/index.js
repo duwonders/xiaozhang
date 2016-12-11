@@ -59,6 +59,7 @@ export default class extends Base {
   }
   indexAction(){
     let data = this.getJsSdk()
+    console.log(data)
     this.assign('conf', data)
     return this.display();
   }
