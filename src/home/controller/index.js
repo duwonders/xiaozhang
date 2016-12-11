@@ -23,6 +23,8 @@ export default class extends Base {
         status: 400,
         message: "参数不足"
       })
+    let res = await this.check(JSON.parse(info))
+    console.log(res) 
     let row = await this
     .model('ifo')
     .add(JSON.parse(info))
@@ -30,5 +32,13 @@ export default class extends Base {
       status: 200,
       message: '成功'
     })
+  }
+  async check(info){
+    return await this
+    .model('ifo')
+    .where({
+      stunum: info.stunum
+    })
+    .find()
   }
 }
