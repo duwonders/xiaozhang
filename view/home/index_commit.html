@@ -44,7 +44,7 @@
   <script src="/trainee/static/js/zepto.js"></script>
   <script>
     function showShadow(){
-      $('body').off('click', showShadow)
+      $('body').off('tap', showShadow)
         $(".shadow").css({
           display: "none"
         })
@@ -101,7 +101,7 @@
             $(".info-con").css({
               display: "block"
             })
-            $('body').on('click', showShadow)
+            $('body').on('tap', showShadow)
           }
         }
       })
