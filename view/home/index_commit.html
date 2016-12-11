@@ -45,10 +45,10 @@
   <script>
     function showShadow(){
       $('body').off('click', showShadow)
-        $("#shadow").css({
+        $(".shadow").css({
           display: "none"
         })
-        $("#info-con").css({
+        $(".info-con").css({
           display: "none"
         })
     }
@@ -95,10 +95,10 @@
         success: function(data){
           if(data.status == 200){
             console.log(1)
-            $("#shadow").css({
+            $(".shadow").css({
               display: "block"
             })
-            $("#info-con").css({
+            $(".info-con").css({
               display: "block"
             })
             $('body').on('click', showShadow)
