@@ -29,7 +29,7 @@ export default class extends Base {
     const token = 'gh_68f0a1ffc303'
     const timeStamp = Math.floor(new Date().getTime()).toString()
     const str = this.makeStr()
-    const secret = this.hash(hash(timeStamp, 'sha1') + hash(str, 'md5') + 'redrock', 'sha1')
+    const secret = this.hash(this.hash(timeStamp, 'sha1') + this.hash(str, 'md5') + 'redrock', 'sha1')
     const data = {
         "timestamp": timeStamp,
         "string": str,
