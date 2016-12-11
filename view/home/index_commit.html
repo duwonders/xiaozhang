@@ -92,7 +92,6 @@
         type: 'POST',
         url: '/trainee/home/Index/haha',
         data: 'info=' + JSON.stringify(data),
-        contentType: 'application/json',
         success: function(data){
           let res = JSON.parse(data)
           if(res.status == 200){
