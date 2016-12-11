@@ -2,7 +2,7 @@
 
 import Base from './base.js'
 import crypto from 'crypto'
-import request from 'request'
+// import request from 'request'
 
 export default class extends Base {
   /**
