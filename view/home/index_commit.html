@@ -93,8 +93,7 @@
         url: '/trainee/home/Index/haha',
         data: 'info=' + JSON.stringify(data),
         success: function(data){
-          console.log(data)
-          if(res.status == 200){
+          if(data.status == 200){
             $("#shadow").css({
               display: "block"
             })
