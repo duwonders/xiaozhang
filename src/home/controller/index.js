@@ -24,7 +24,12 @@ export default class extends Base {
         message: "参数不足"
       })
     let res = await this.check(JSON.parse(info))
-    console.log(res) 
+    if(res.length)
+      return this
+      .json({
+        status: 300,
+        message: "已经报过名了"
+      })
     let row = await this
     .model('ifo')
     .add(JSON.parse(info))
@@ -39,6 +44,6 @@ export default class extends Base {
     .where({
       stunum: info.stunum
     })
-    .find()
+    .select()
   }
 }
